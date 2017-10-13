@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Board(models.Model):
@@ -23,4 +23,3 @@ class Post(models.Model):
     updated_at = models.DateTimeField(null=True)
     created_by = models.ForeignKey(User, related_name='posts')
     updated_by = models.ForeignKey(User, null=True, related_name='+')
-
