@@ -1,27 +1,39 @@
+{% load static %}
 <!doctype html>
 <html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>Boards</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
 <body>
-<table border="1">
-  <thead>
-  <tr>
-    <th>Board</th>
-    <th>Posts</th>
-    <th>Topics</th>
-    <th>Last Post</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for board in boards %}
+<div class="container">
+  <ol class="breadcrumb my-4">
+    <li class="breadcrumb-item active">Boards</li>
+  </ol>
+  <table border="1">
+    <thead>
     <tr>
-      <td>
-        {{ board.name }}<br>
-        <small style="color: #888">{{ board.description }}</small>
-      </td>
-      <td>0</td>
-      <td>0</td>
-      <td></td>
+      <th>Board</th>
+      <th>Posts</th>
+      <th>Topics</th>
+      <th>Last Post</th>
     </tr>
-  {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+    {% for board in boards %}
+      <tr>
+        <td>
+          {{ board.name }}<br>
+          <small style="color: #888">{{ board.description }}</small>
+        </td>
+        <td>0</td>
+        <td>0</td>
+        <td></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
 </html>
