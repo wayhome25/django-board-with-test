@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -7,7 +6,6 @@ from django.shortcuts import render
 from boards.forms import NewTopicForm
 from boards.models import Board
 from boards.models import Post
-from boards.models import Topic
 
 
 def home(request):
@@ -31,7 +29,7 @@ def new_topic(request, pk):
             topic.board = board
             topic.starter = user
             topic.save()
-            post = Post.objects.create(
+            Post.objects.create(
                     message=form.cleaned_data.get('message'),
                     topic=topic,
                     created_by=user

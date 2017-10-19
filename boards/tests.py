@@ -24,7 +24,8 @@ class HomeTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_home_url_resolves_home_view(self):
-        view = resolve('/')  # return : ResolverMatch(func=boards.views.home, args=(), kwargs={}, url_name=home, app_names=[], namespaces=[])
+        # return : ResolverMatch(func=boards.views.home, args=(), kwargs={}, url_name=home, app_names=[], namespaces=[])
+        view = resolve('/')
         self.assertEqual(view.func, home)
 
     def test_home_view_contains_link_to_topics_page(self):
@@ -59,10 +60,6 @@ class BoardTopicsTests(TestCase):
 
         self.assertContains(response, 'href="{}"'.format(homepage_url))
         self.assertContains(response, 'href="{}"'.format(new_topic_url))
-
-    def test_board_topics_view_contains_navigation_links(self):
-        board_topics_url = reverse('board_topics', kwargs={'pk': 1})
-
 
 
 class NewTopicTests(TestCase):
