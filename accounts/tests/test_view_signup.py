@@ -1,9 +1,9 @@
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls.base import resolve
 from django.urls.base import reverse
 
+from accounts.forms import SignUpForm
 from accounts.views import signup
 
 
@@ -25,7 +25,14 @@ class SignUpTests(TestCase):
 
     def test_contains_form(self):
         form = self.response.context.get('form')
-        self.assertIsInstance(form, UserCreationForm)
+        self.assertIsInstance(form, SignUpForm)
+
+    def test_form_inputs(self):
+        """The view must contain six inputs: csrf, username, email, password1, password2, submit button"""
+        self.assertContains(self.response, '<input', 6)
+        self.assertContains(self.response, 'type="text"', 1)
+        self.assertContains(self.response, 'type="email"', 1)
+        self.assertContains(self.response, 'type="password"', 2)
 
 
 class SuccessfulSignUpTest(TestCase):
@@ -33,6 +40,7 @@ class SuccessfulSignUpTest(TestCase):
         url = reverse('signup')
         data = {
             'username': 'john',
+            'email': 'test@abc.com',
             'password1': 'asdf1234',
             'password2': 'asdf1234'
         }
